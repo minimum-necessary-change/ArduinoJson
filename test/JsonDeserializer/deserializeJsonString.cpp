@@ -2,7 +2,6 @@
 // Copyright Benoit Blanchon 2014-2019
 // MIT License
 
-#define ARDUINOJSON_DECODE_UNICODE 1
 #include <ArduinoJson.h>
 #include <catch.hpp>
 

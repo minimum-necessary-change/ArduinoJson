@@ -6,9 +6,8 @@
 #include <stdint.h>
 #include <catch.hpp>
 
-static const char* null = 0;
-
 TEST_CASE("JsonVariant::as()") {
+  static const char* null = 0;
   DynamicJsonDocument doc(4096);
   JsonVariant variant = doc.to<JsonVariant>();
 

@@ -4,14 +4,9 @@
 
 #include <ArduinoJson.h>
 #include <catch.hpp>
+#include "utils.hpp"
 
 using ARDUINOJSON_NAMESPACE::addPadding;
-
-static void REQUIRE_JSON(JsonDocument& doc, const std::string& expected) {
-  std::string json;
-  serializeJson(doc, json);
-  REQUIRE(json == expected);
-}
 
 TEST_CASE("DynamicJsonDocument") {
   DynamicJsonDocument doc(4096);

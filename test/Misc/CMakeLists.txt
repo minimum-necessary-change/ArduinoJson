@@ -3,12 +3,8 @@
 # MIT License
 
 add_executable(MiscTests
-    empty.cpp
-	FloatParts.cpp
-	StringWriter.cpp
-	TypeTraits.cpp
-	unsigned_char.cpp
-	version.cpp
+	bundle.cpp 
+	empty.cpp # don't put this one in the bundle
 )
 
 target_link_libraries(MiscTests catch)

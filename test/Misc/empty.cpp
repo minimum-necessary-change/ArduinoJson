@@ -2,6 +2,6 @@
 // Copyright Benoit Blanchon 2014-2019
 // MIT License
 
-// catch.hpp mutes several warnings, this file allows to detect them
+// catch.hpp mutes several warnings, this file allows detecting them
 
 #include "ArduinoJson.h"

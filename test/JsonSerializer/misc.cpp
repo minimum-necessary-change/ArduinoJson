@@ -1,16 +1,7 @@
 #include <ArduinoJson.h>
 #include <catch.hpp>
 #include <limits>
-
-template <typename T>
-void check(T value, const std::string &expected) {
-  DynamicJsonDocument doc(4096);
-  doc.to<JsonVariant>().set(value);
-  char buffer[256] = "";
-  size_t returnValue = serializeJson(doc, buffer, sizeof(buffer));
-  REQUIRE(expected == buffer);
-  REQUIRE(expected.size() == returnValue);
-}
+#include "utils.hpp"
 
 TEST_CASE("serializeJson(MemberProxy)") {
   DynamicJsonDocument doc(4096);

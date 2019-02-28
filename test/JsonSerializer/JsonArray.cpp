@@ -4,41 +4,33 @@
 
 #include <ArduinoJson.h>
 #include <catch.hpp>
-
-static void check(JsonArray array, std::string expected) {
-  std::string actual;
-  size_t actualLen = serializeJson(array, actual);
-  REQUIRE(expected == actual);
-  REQUIRE(actualLen == expected.size());
-  size_t measuredLen = measureJson(array);
-  REQUIRE(measuredLen == expected.size());
-}
+#include "utils.hpp"
 
 TEST_CASE("serializeJson(JsonArray)") {
   StaticJsonDocument<JSON_ARRAY_SIZE(2)> doc;
   JsonArray array = doc.to<JsonArray>();
 
   SECTION("Empty") {
-    check(array, "[]");
+    checkJson(array, "[]");
   }
 
   SECTION("Null") {
     array.add(static_cast<char *>(0));
 
-    check(array, "[null]");
+    checkJson(array, "[null]");
   }
 
   SECTION("OneString") {
     array.add("hello");
 
-    check(array, "[\"hello\"]");
+    checkJson(array, "[\"hello\"]");
   }
 
   SECTION("TwoStrings") {
     array.add("hello");
     array.add("world");
 
-    check(array, "[\"hello\",\"world\"]");
+    checkJson(array, "[\"hello\",\"world\"]");
   }
 
   SECTION("OneStringOverCapacity") {
@@ -46,38 +38,38 @@ TEST_CASE("serializeJson(JsonArray)") {
     array.add("world");
     array.add("lost");
 
-    check(array, "[\"hello\",\"world\"]");
+    checkJson(array, "[\"hello\",\"world\"]");
   }
 
   SECTION("One double") {
     array.add(3.1415927);
-    check(array, "[3.1415927]");
+    checkJson(array, "[3.1415927]");
   }
 
   SECTION("OneInteger") {
     array.add(1);
 
-    check(array, "[1]");
+    checkJson(array, "[1]");
   }
 
   SECTION("TwoIntegers") {
     array.add(1);
     array.add(2);
 
-    check(array, "[1,2]");
+    checkJson(array, "[1,2]");
   }
 
   SECTION("serialized(const char*)") {
     array.add(serialized("{\"key\":\"value\"}"));
 
-    check(array, "[{\"key\":\"value\"}]");
+    checkJson(array, "[{\"key\":\"value\"}]");
   }
 
   SECTION("serialized(char*)") {
     char tmp[] = "{\"key\":\"value\"}";
     array.add(serialized(tmp));
 
-    check(array, "[{\"key\":\"value\"}]");
+    checkJson(array, "[{\"key\":\"value\"}]");
   }
 
   SECTION("OneIntegerOverCapacity") {
@@ -85,26 +77,26 @@ TEST_CASE("serializeJson(JsonArray)") {
     array.add(2);
     array.add(3);
 
-    check(array, "[1,2]");
+    checkJson(array, "[1,2]");
   }
 
   SECTION("OneTrue") {
     array.add(true);
 
-    check(array, "[true]");
+    checkJson(array, "[true]");
   }
 
   SECTION("OneFalse") {
     array.add(false);
 
-    check(array, "[false]");
+    checkJson(array, "[false]");
   }
 
   SECTION("TwoBooleans") {
     array.add(false);
     array.add(true);
 
-    check(array, "[false,true]");
+    checkJson(array, "[false,true]");
   }
 
   SECTION("OneBooleanOverCapacity") {
@@ -112,18 +104,18 @@ TEST_CASE("serializeJson(JsonArray)") {
     array.add(true);
     array.add(false);
 
-    check(array, "[false,true]");
+    checkJson(array, "[false,true]");
   }
 
   SECTION("OneEmptyNestedArray") {
     array.createNestedArray();
 
-    check(array, "[[]]");
+    checkJson(array, "[[]]");
   }
 
   SECTION("OneEmptyNestedHash") {
     array.createNestedObject();
 
-    check(array, "[{}]");
+    checkJson(array, "[{}]");
   }
 }

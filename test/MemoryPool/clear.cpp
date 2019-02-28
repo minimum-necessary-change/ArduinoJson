@@ -7,9 +7,8 @@
 
 using namespace ARDUINOJSON_NAMESPACE;
 
-static const size_t poolCapacity = 512;
-
 TEST_CASE("MemoryPool::clear()") {
+  static const size_t poolCapacity = 512;
   char buffer[poolCapacity];
   MemoryPool pool(buffer, sizeof(buffer));
 

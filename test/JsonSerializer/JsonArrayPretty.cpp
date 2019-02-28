@@ -4,53 +4,45 @@
 
 #include <ArduinoJson.h>
 #include <catch.hpp>
-
-static void check(JsonArray array, std::string expected) {
-  std::string actual;
-  size_t actualLen = serializeJsonPretty(array, actual);
-  size_t measuredLen = measureJsonPretty(array);
-  CHECK(actualLen == expected.size());
-  CHECK(measuredLen == expected.size());
-  REQUIRE(expected == actual);
-}
+#include "utils.hpp"
 
 TEST_CASE("serializeJsonPretty(JsonArray)") {
   DynamicJsonDocument doc(4096);
   JsonArray array = doc.to<JsonArray>();
 
   SECTION("Empty") {
-    check(array, "[]");
+    checkJsonPretty(array, "[]");
   }
 
   SECTION("OneElement") {
     array.add(1);
 
-    check(array,
-          "[\r\n"
-          "  1\r\n"
-          "]");
+    checkJsonPretty(array,
+                    "[\r\n"
+                    "  1\r\n"
+                    "]");
   }
 
   SECTION("TwoElements") {
     array.add(1);
     array.add(2);
 
-    check(array,
-          "[\r\n"
-          "  1,\r\n"
-          "  2\r\n"
-          "]");
+    checkJsonPretty(array,
+                    "[\r\n"
+                    "  1,\r\n"
+                    "  2\r\n"
+                    "]");
   }
 
   SECTION("EmptyNestedArrays") {
     array.createNestedArray();
     array.createNestedArray();
 
-    check(array,
-          "[\r\n"
-          "  [],\r\n"
-          "  []\r\n"
-          "]");
+    checkJsonPretty(array,
+                    "[\r\n"
+                    "  [],\r\n"
+                    "  []\r\n"
+                    "]");
   }
 
   SECTION("NestedArrays") {
@@ -61,15 +53,15 @@ TEST_CASE("serializeJsonPretty(JsonArray)") {
     JsonObject nested2 = array.createNestedObject();
     nested2["key"] = 3;
 
-    check(array,
-          "[\r\n"
-          "  [\r\n"
-          "    1,\r\n"
-          "    2\r\n"
-          "  ],\r\n"
-          "  {\r\n"
-          "    \"key\": 3\r\n"
-          "  }\r\n"
-          "]");
+    checkJsonPretty(array,
+                    "[\r\n"
+                    "  [\r\n"
+                    "    1,\r\n"
+                    "    2\r\n"
+                    "  ],\r\n"
+                    "  {\r\n"
+                    "    \"key\": 3\r\n"
+                    "  }\r\n"
+                    "]");
   }
 }

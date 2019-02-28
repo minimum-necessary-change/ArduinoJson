@@ -2,11 +2,7 @@
 # Copyright Benoit Blanchon 2014-2019
 # MIT License
 
-add_executable(IntegrationTests
-	gbathree.cpp
-	issue772.cpp
-	round_trip.cpp
-)
+add_executable(IntegrationTests bundle.cpp)
 
 if(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
 	target_compile_options(IntegrationTests

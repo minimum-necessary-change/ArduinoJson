@@ -9,71 +9,71 @@
 using namespace ARDUINOJSON_NAMESPACE;
 
 template <typename T>
-void check(const char* input, T expected) {
+void checkInteger(const char* input, T expected) {
   CAPTURE(input);
   T actual = parseInteger<T>(input);
   REQUIRE(expected == actual);
 }
 
 TEST_CASE("parseInteger<int8_t>()") {
-  check<int8_t>("-128", -128);
-  check<int8_t>("127", 127);
-  check<int8_t>("+127", 127);
-  check<int8_t>("3.14", 3);
-  check<int8_t>("x42", 0);
-  check<int8_t>("128", -128);
-  check<int8_t>("-129", 127);
-  check<int8_t>(NULL, 0);
-  check<int8_t>("true", 1);
-  check<int8_t>("false", 0);
+  checkInteger<int8_t>("-128", -128);
+  checkInteger<int8_t>("127", 127);
+  checkInteger<int8_t>("+127", 127);
+  checkInteger<int8_t>("3.14", 3);
+  checkInteger<int8_t>("x42", 0);
+  checkInteger<int8_t>("128", -128);
+  checkInteger<int8_t>("-129", 127);
+  checkInteger<int8_t>(NULL, 0);
+  checkInteger<int8_t>("true", 1);
+  checkInteger<int8_t>("false", 0);
 }
 
 TEST_CASE("parseInteger<int16_t>()") {
-  check<int16_t>("-32768", -32768);
-  check<int16_t>("32767", 32767);
-  check<int16_t>("+32767", 32767);
-  check<int16_t>("3.14", 3);
-  check<int16_t>("x42", 0);
-  check<int16_t>("-32769", 32767);
-  check<int16_t>("32768", -32768);
-  check<int16_t>(NULL, 0);
-  check<int16_t>("true", 1);
-  check<int16_t>("false", 0);
+  checkInteger<int16_t>("-32768", -32768);
+  checkInteger<int16_t>("32767", 32767);
+  checkInteger<int16_t>("+32767", 32767);
+  checkInteger<int16_t>("3.14", 3);
+  checkInteger<int16_t>("x42", 0);
+  checkInteger<int16_t>("-32769", 32767);
+  checkInteger<int16_t>("32768", -32768);
+  checkInteger<int16_t>(NULL, 0);
+  checkInteger<int16_t>("true", 1);
+  checkInteger<int16_t>("false", 0);
 }
 
 TEST_CASE("parseInteger<int32_t>()") {
-  check<int32_t>("-2147483648", (-2147483647 - 1));
-  check<int32_t>("2147483647", 2147483647);
-  check<int32_t>("+2147483647", 2147483647);
-  check<int32_t>("3.14", 3);
-  check<int32_t>("x42", 0);
-  check<int32_t>("-2147483649", 2147483647);
-  check<int32_t>("2147483648", (-2147483647 - 1));
-  check<int32_t>("true", 1);
-  check<int32_t>("false", 0);
+  checkInteger<int32_t>("-2147483648", (-2147483647 - 1));
+  checkInteger<int32_t>("2147483647", 2147483647);
+  checkInteger<int32_t>("+2147483647", 2147483647);
+  checkInteger<int32_t>("3.14", 3);
+  checkInteger<int32_t>("x42", 0);
+  checkInteger<int32_t>("-2147483649", 2147483647);
+  checkInteger<int32_t>("2147483648", (-2147483647 - 1));
+  checkInteger<int32_t>("true", 1);
+  checkInteger<int32_t>("false", 0);
 }
 
 TEST_CASE("parseInteger<uint8_t>()") {
-  check<uint8_t>("0", 0);
-  check<uint8_t>("255", 255);
-  check<uint8_t>("+255", 255);
-  check<uint8_t>("3.14", 3);
-  check<uint8_t>("x42", 0);
-  check<uint8_t>("-1", 255);
-  check<uint8_t>("256", 0);
-  check<uint8_t>("true", 1);
-  check<uint8_t>("false", 0);
+  checkInteger<uint8_t>("0", 0);
+  checkInteger<uint8_t>("255", 255);
+  checkInteger<uint8_t>("+255", 255);
+  checkInteger<uint8_t>("3.14", 3);
+  checkInteger<uint8_t>("x42", 0);
+  checkInteger<uint8_t>("-1", 255);
+  checkInteger<uint8_t>("256", 0);
+  checkInteger<uint8_t>("true", 1);
+  checkInteger<uint8_t>("false", 0);
 }
 
 TEST_CASE("parseInteger<uint16_t>()") {
-  check<uint16_t>("0", 0);
-  check<uint16_t>("65535", 65535);
-  check<uint16_t>("+65535", 65535);
-  check<uint16_t>("3.14", 3);
-  // check<uint16_t>(" 42", 0);
-  check<uint16_t>("x42", 0);
-  check<uint16_t>("-1", 65535);
-  check<uint16_t>("65536", 0);
-  check<uint16_t>("true", 1);
-  check<uint16_t>("false", 0);
+  checkInteger<uint16_t>("0", 0);
+  checkInteger<uint16_t>("65535", 65535);
+  checkInteger<uint16_t>("+65535", 65535);
+  checkInteger<uint16_t>("3.14", 3);
+  // checkInteger<uint16_t>(" 42", 0);
+  checkInteger<uint16_t>("x42", 0);
+  checkInteger<uint16_t>("-1", 65535);
+  checkInteger<uint16_t>("65536", 0);
+  checkInteger<uint16_t>("true", 1);
+  checkInteger<uint16_t>("false", 0);
 }

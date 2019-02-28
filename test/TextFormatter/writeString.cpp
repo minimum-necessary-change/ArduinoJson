@@ -9,7 +9,7 @@
 
 using namespace ARDUINOJSON_NAMESPACE;
 
-void check(const char* input, std::string expected) {
+void checkString(const char* input, std::string expected) {
   char output[1024];
   StaticStringWriter sb(output, sizeof(output));
   TextFormatter<StaticStringWriter> writer(sb);
@@ -20,42 +20,42 @@ void check(const char* input, std::string expected) {
 
 TEST_CASE("TextFormatter::writeString()") {
   SECTION("Null") {
-    check(0, "null");
+    checkString(0, "null");
   }
 
   SECTION("EmptyString") {
-    check("", "\"\"");
+    checkString("", "\"\"");
   }
 
   SECTION("QuotationMark") {
-    check("\"", "\"\\\"\"");
+    checkString("\"", "\"\\\"\"");
   }
 
   SECTION("ReverseSolidus") {
-    check("\\", "\"\\\\\"");
+    checkString("\\", "\"\\\\\"");
   }
 
   SECTION("Solidus") {
-    check("/", "\"/\"");  // but the JSON format allows \/
+    checkString("/", "\"/\"");  // but the JSON format allows \/
   }
 
   SECTION("Backspace") {
-    check("\b", "\"\\b\"");
+    checkString("\b", "\"\\b\"");
   }
 
   SECTION("Formfeed") {
-    check("\f", "\"\\f\"");
+    checkString("\f", "\"\\f\"");
   }
 
   SECTION("Newline") {
-    check("\n", "\"\\n\"");
+    checkString("\n", "\"\\n\"");
   }
 
   SECTION("CarriageReturn") {
-    check("\r", "\"\\r\"");
+    checkString("\r", "\"\\r\"");
   }
 
   SECTION("HorizontalTab") {
-    check("\t", "\"\\t\"");
+    checkString("\t", "\"\\t\"");
   }
 }

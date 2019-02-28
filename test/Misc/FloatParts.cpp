@@ -2,7 +2,7 @@
 // Copyright Benoit Blanchon 2014-2019
 // MIT License
 
-#include <ArduinoJson/Numbers/FloatParts.hpp>
+#include <ArduinoJson.h>
 #include <catch.hpp>
 
 using namespace ARDUINOJSON_NAMESPACE;
